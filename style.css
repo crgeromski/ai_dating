@@ -711,6 +711,7 @@ section {
     display: flex; /* Use Flexbox */
     flex-direction: column; /* Stack steps vertically */
     /* Default align-items is stretch, which is fine */
+    overflow: hidden; /* Prevent ALL scrollbars from animations */
 }
 
 #how-it-works h2 {
