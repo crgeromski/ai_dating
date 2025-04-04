@@ -1,0 +1,2003 @@
+/* Define Custom Font */
+@font-face {
+    font-family: 'Lovelo Black';
+    src: url('assets/fonts/Lovelo Black.otf') format('opentype');
+    /* Consider adding font-weight and font-style if needed for other variants */
+}
+
+/* CSS Resets and Basic Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Lato', sans-serif; /* Apply Lato to body text */
+    font-size: var(--base-font-size); /* Use variable */
+    line-height: 1.6;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    /* overflow-x: hidden; /* Prevent horizontal scrolling - REMOVED AGAIN */
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+}
+
+/* Define Color Palette as CSS Variables (from website_infodatei.md, Section C) */
+:root {
+    --color-background: #faf1e7; /* Neuer Hintergrundton */
+    --color-text: #000000; /* Schwarz */
+    --color-primary-accent: #AD3E3C; /* Geändertes Beerenrot */
+    --color-secondary-accent: #db718e; /* Altrosa */
+    --color-white: #FFFFFF;
+    /* Add neutral grays if needed later, e.g., --color-gray-light: #f5f5f5; */
+
+    /* Font Size Variables */
+    --h1-font-size: 52px;
+    --h2-font-size: 32px;
+    --h3-font-size: 26px;
+    --h4-font-size: 20px; /* Default H4 size */
+    --base-font-size: 18px; /* User defined base size */
+
+    /* Button Font Variables */
+    --button-font-family: 'Poppins', sans-serif; /* Example: Use Poppins for buttons */
+    --button-font-size: 20px; /* Example: Use 1rem for buttons */
+}
+
+/* Basic Link Styling */
+a {
+    color: var(--color-primary-accent);
+    text-decoration: none; /* Remove underline by default */
+}
+
+h1, h2, h3 {
+    font-family: 'Lovelo Black', sans-serif; /* Apply Lovelo Black to all headings by default */
+    /* font-weight and margin-bottom will be set more specifically */
+}
+
+/* Basic Button Styling (can be refined) */
+.cta-button,
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+    border: none;
+    border-radius: 5px;
+    cursor: none; /* Changed from pointer */
+    text-align: center;
+    font-family: var(--button-font-family); /* Use variable */
+    font-size: var(--button-font-size); /* Use variable */
+    font-weight: bold; /* Added bold font weight */
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover,
+button:hover {
+    background-color: var(--color-secondary-accent); /* Example hover effect */
+    text-decoration: none;
+}
+
+button:disabled {
+    background-color: #cccccc; /* Simple disabled style */
+    cursor: not-allowed;
+}
+
+/* Basic Section Styling */
+section {
+    /* Adjusted padding: top 150px, sides 20px, bottom 50px */
+    padding: 150px 20px 50px 20px; /* Default padding, reduced bottom */
+    /* Add max-width and centering later */
+}
+
+/* Removed top margin rule, spacing is now handled by section padding-top */
+/*
+#vision,
+#how-it-works,
+#about,
+#roadmap,
+#platform,
+#testimonials {
+    margin-top: 100px;
+}
+*/
+
+/* Header Styles */
+#header {
+    background-color: transparent; /* Changed background to transparent */
+    padding: 0px 0px;
+    /* border-bottom: 1px solid #eee; /* Removed border */
+    position: absolute; /* Changed to absolute positioning */
+    top: 20px; /* Reduced top distance to 20px */
+    width: 100%; /* Ensure full width */
+    z-index: 100; /* Ensure it stays on top */
+}
+
+#header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px; /* Reduced width limit */
+    margin: 0 auto;
+}
+
+#header .logo span { /* Style the placeholder text */
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-primary-accent); /* Use accent color for logo text */
+}
+
+#header .logo img { /* Style the logo image */
+    max-height: 40px; /* Decreased size by 25px */
+    width: auto;
+    vertical-align: middle; /* Align image nicely if text is next to it */
+}
+
+#header nav ul {
+    list-style: none;
+    display: flex;
+    flex-grow: 1; /* Allow menu to fill space */
+    justify-content: center; /* Center menu items */
+    gap: 40px; /* Further increased spacing between menu items */
+    /* Removed margins, space-between on nav handles spacing */
+}
+
+#header nav ul li a {
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+    font-weight: 700; /* Match heading weight */
+    font-size: 20px; /* Set font size */
+    color: var(--color-white); /* Changed text color to White */
+    padding: 5px 0;
+    text-transform: uppercase; /* Make menu items uppercase */
+    position: relative; /* Needed for pseudo-element positioning */
+    transition: color 0.3s ease, transform 0.2s ease-out; /* Add transition for transform */
+    display: inline-block; /* Needed for transform to work correctly */
+    cursor: none; /* Added to remove hand cursor */
+}
+
+#header nav ul li a::after { /* Style for the animated underline */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px; /* Thickness of the underline */
+    bottom: -2px; /* Position below the text */
+    left: 0;
+    background-color: var(--color-white); /* Changed underline color to white */
+    transform: scaleX(0); /* Start with no width */
+    transform-origin: bottom right; /* Animation origin */
+    transition: transform 0.3s ease-out; /* Animation speed */
+}
+
+#header nav ul li a:hover,
+#header nav ul li a:focus,
+#header nav ul li a.active { /* Added .active state */
+    color: var(--color-primary-accent); /* Set text color to primary accent */
+    text-decoration: none; /* Ensure default underline doesn't show */
+    transform: scale(1.1); /* Add scaling effect */
+}
+
+/* Keep hover/focus separate from active for transform if needed, or combine if transform should always apply */
+/* Let's keep transform on hover/focus only for now */
+#header nav ul li a:hover,
+#header nav ul li a:focus {
+    transform: scale(1.1);
+}
+#header nav ul li a.active {
+     color: var(--color-primary-accent); /* Ensure active color */
+     /* No transform needed for static active state */
+}
+
+
+#header nav ul li a:hover::after,
+#header nav ul li a:focus::after,
+#header nav ul li a.active::after { /* Added .active state */
+    transform: scaleX(1); /* Expand underline on hover/focus/active */
+    transform-origin: bottom left; /* Change origin for expansion direction */
+    background-color: var(--color-primary-accent); /* Change underline color on hover/focus/active */
+}
+
+/* Style for the header button container (optional, for spacing if needed) */
+.header-button {
+    /* Add margin-left if needed to push away from menu */
+}
+
+/* Add glow effect to the header button */
+.header-button .cta-button {
+    background-color: var(--color-white); /* Changed background to white */
+    color: var(--color-primary-accent); /* Changed text color to red */
+    font-size: var(--button-font-size); /* Use variable */
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7); /* White glow */
+}
+
+.header-button .cta-button:hover {
+    background-color: var(--color-primary-accent); /* Changed hover background to red */
+    color: var(--color-white); /* Changed hover text color to white */
+    text-decoration: none;
+}
+
+/* Hero Section Styles */
+#hero {
+    height: 100vh; /* Set height to full viewport height */
+    display: flex; /* Use flexbox for positioning content */
+    /* flex-direction: column; REMOVED */
+    justify-content: flex-end; /* Align content container to the right */
+    align-items: flex-end; /* Vertically align content container to the bottom */
+    /* text-align: center; REMOVED - will be set on container */
+    padding: 40px 5%; /* Adjust padding, use percentage for responsiveness */
+    position: relative; /* Needed for potential pseudo-elements or parallax layers */
+    overflow: hidden; /* Hide parts of parallax background if they extend */
+    background-image: url('assets/images/hintergrund hero.png'); /* Updated background image */
+    background-size: cover; /* Cover the entire section */
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* Add a subtle overlay to improve text readability if needed */
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    /* background-blend-mode: overlay; */
+    color: var(--color-primary-accent); /* Change text color to primary accent */
+}
+
+/* Add overlay for transparency */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1); /* Increased transparency (10% opaque) */
+    z-index: 1; /* Place overlay above background, below content */
+}
+
+.hero-content { /* Style the new container */
+    max-width: 45%; /* Limit width to roughly half the screen */
+    text-align: right; /* Align text to the right */
+    z-index: 2; /* Ensure text is above background/overlay */
+    position: relative; /* Keep relative for z-index and potential future adjustments */
+    /* top: -200px; /* REMOVED vertical offset */
+    /* right: 150px; /* REMOVED horizontal offset */
+    margin-bottom: calc(5vh + 100px); /* Increased bottom margin to move up */
+    margin-right: 150px; /* Added right margin to move left */
+    animation: slideInFromRight 1s ease-out 0.5s forwards; /* Keep animation */
+    opacity: 0; /* Start hidden for animation */
+}
+
+/* Keyframes for slide-in animation */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* New Section Styles */
+#new-section {
+    background-color: #C3A384;
+    padding: 150px 20px 60px 20px; /* Top padding 150px, bottom 60px */
+    color: var(--color-white); /* Default text color for the section */
+    position: relative; /* Needed for z-index stacking */
+    z-index: 1; /* Lower z-index than divider */
+}
+
+.new-section-content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Ensure h1 inside new-section uses the general h1 styles */
+#new-section h1 { /* Changed from h2 to h1 */
+    /* Inherits from the grouped h1 rule: */
+    font-size: var(--h1-font-size); /* Use variable */
+    /* font-weight: normal; */ /* Inherited */
+    /* line-height: 1.3; */ /* Inherited */
+    color: var(--color-primary-accent); /* Explicitly set primary accent color */
+    margin-bottom: 100px; /* Set bottom margin to 100px */
+    /* text-align: center; */ /* Inherited from wrapper */
+    text-transform: uppercase; /* Explicitly set uppercase */
+    margin-bottom: 50px; /* Adjusted bottom margin to 50px */
+}
+
+/* Style the button specifically within the new section to match the header button */
+#new-section .cta-button {
+    display: block; /* Make it a block element */
+    width: auto; /* Default block width (stretches) */
+    max-width: 60%; /* Limit width to 60% of container */
+    margin-left: auto; /* Center the block button */
+    margin-right: auto; /* Center the block button */
+    background-color: var(--color-white); /* Match header: White background */
+    color: var(--color-primary-accent); /* Match header: Red text */
+    font-size: var(--button-font-size); /* Use variable */
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7); /* Match header: White glow */
+    margin-bottom: 50px; /* Adjusted bottom margin to 50px */
+}
+
+#new-section .cta-button:hover {
+    background-color: var(--color-primary-accent); /* Match header hover: Red background */
+    color: var(--color-white); /* Match header hover: White text */
+    text-decoration: none;
+}
+
+
+/* Style the social banner container specifically within the new section */
+#new-section .social-banner-container {
+    /* margin-top: 75px; /* Removed margin-top, handled by button margin-bottom */
+    max-width: none; /* Override max-width from general rule if needed */
+    padding: 0; /* Override padding from general rule if needed */
+    margin-bottom: 0; /* Remove default bottom margin if any */
+}
+
+/* Optional: Adjust social icon appearance on this background if needed */
+#new-section .social-links-wrapper img {
+     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3)); /* Example: White glow */
+}
+
+#new-section .social-links-wrapper a:hover img {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.5)); /* Brighter white glow on hover */
+}
+
+/* Roadmap Timeline Styles */
+#roadmap {
+    background-color: var(--color-background-light, #FAF1E7); /* Use light background or fallback */
+    padding-top: 60px; /* Keep reduced padding */
+    padding-bottom: 100px; /* Add more space at the bottom */
+    max-width: 1400px; /* Increased max-width */
+    margin: 0 auto;
+    position: relative; /* Needed for the central line */
+}
+
+#roadmap h2 {
+    margin-bottom: 75px; /* Space between heading and timeline */
+}
+
+.timeline-container {
+    position: relative;
+    padding: 20px 0; /* Add some padding top/bottom */
+}
+
+/* The central vertical line */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px; /* Line thickness */
+    background-color: var(--color-primary-accent, #AD3E3C); /* Use primary accent */
+    transform: translateX(-50%); /* Center the line */
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%; /* Each item container takes half the width */
+    margin-bottom: 100px; /* Vertical distance between items */
+    box-sizing: border-box;
+    display: flex; /* Use Flexbox for alignment */
+    /* Padding applied below */
+    opacity: 1; /* Ensure items are always opaque */
+    /* transition removed again - JS sets variable, CSS calc uses it directly */
+    /* Initial transform set by CSS calc based on --scroll-progress */
+    /* Default --scroll-progress is undefined, treat as 0 */
+}
+
+/* Position items left and right, adding padding for the 100px gap */
+.timeline-item.left {
+    /* Calculate transform based on --scroll-progress (0 to 1) */
+    /* translateX = -100% * (1 - progress) */
+    transform: translateX(calc(-100% * (1 - var(--scroll-progress, 0))));
+    left: 0;
+    padding-right: 100px; /* Restore padding */
+    justify-content: flex-end; /* Push content to the right */
+}
+
+.timeline-item.right {
+    left: 50%;
+    /* Calculate transform based on --scroll-progress (0 to 1) */
+    /* translateX = 100% * (1 - progress) */
+    transform: translateX(calc(100% * (1 - var(--scroll-progress, 0))));
+    padding-left: 100px; /* Restore padding */
+    justify-content: flex-start; /* Keep content to the left */
+}
+
+/* Target state rule removed - JS sets transform directly */
+
+/* The horizontal connecting line */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 92px; /* Width to cover the gap (100px - 8px circle radius) */
+    height: 4px; /* Match vertical line thickness */
+    background-color: var(--color-primary-accent, #AD3E3C); /* Use primary accent */
+    top: 20px; /* Adjust vertical position */
+    border-radius: 2px;
+    z-index: 0; /* Behind the circle */
+}
+
+.timeline-item.left::after {
+    right: 8px; /* Position line starting from circle edge */
+}
+
+.timeline-item.right::after {
+    left: 8px; /* Position line starting from circle edge */
+}
+
+/* The circle on the timeline */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-primary-accent, #AD3E3C); /* Use primary accent */
+    border: 3px solid var(--color-background-light, #FAF1E7); /* Match background */
+    top: 15px; /* Align with horizontal line */
+    z-index: 1; /* Above the line */
+}
+
+.timeline-item.left::before {
+    right: -8px; /* Position circle centered on the line */
+    transform: translateX(50%); /* Center the circle on the line */
+}
+
+.timeline-item.right::before {
+    left: -8px; /* Position circle centered on the line */
+    transform: translateX(-50%); /* Center the circle on the line */
+}
+
+/* Content box styling - now has fixed width */
+.timeline-content {
+    padding: 20px 30px;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    position: relative; /* Back to relative positioning */
+    width: 375px; /* Reverted width to 375px */
+    /* display: inline-block; /* REMOVED */
+    box-sizing: border-box;
+    /* vertical-align: top; /* REMOVED */
+    text-align: left; /* Ensure text inside is left-aligned */
+    flex-shrink: 0; /* Prevent shrinking within flex container */
+}
+
+/* Adjust alignment for left items */
+/* .timeline-item.left text-align: right handles container alignment */
+/* .timeline-content text-align: left handles internal text */
+
+/* Relative positioning rules REMOVED */
+
+.timeline-content h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-primary-accent);
+    margin-bottom: 10px;
+    font-size: var(--h3-font-size); /* Use variable */
+}
+
+.timeline-content p {
+    /* font-size: 0.95rem; */ /* Removed specific font size */
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 960px) { /* Adjusted breakpoint */
+    #roadmap {
+        max-width: 100%; /* Allow full width */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .timeline-container::before {
+        left: 30px; /* Move line to the left */
+        transform: translateX(0);
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px; /* Adjusted Space for line/circle */
+        padding-right: 15px; /* Reduced right padding */
+        left: 0 !important; /* Override positioning */
+        text-align: left !important; /* Force left align */
+        margin-bottom: 50px; /* Reduce space between items */
+    }
+
+    /* Reset absolute positioning for content on mobile */
+    .timeline-content {
+        position: relative; /* Back to relative */
+        /* width: 100%; /* Temporarily commented out */
+        /* max-width: 400px; /* Temporarily commented out */
+        display: block; /* Ensure block display */
+        left: auto !important; /* Reset absolute positioning */
+        right: auto !important; /* Reset absolute positioning */
+        top: auto !important; /* Reset absolute positioning */
+    }
+
+    .timeline-item::after { /* Horizontal line */
+        left: 38px; /* Position relative to the new vertical line */
+        width: 20px; /* Shorter line */
+    }
+
+    .timeline-item::before { /* Circle */
+        left: 30px; /* Position on the new vertical line */
+        transform: translateX(-50%);
+        top: 15px;
+    }
+
+    .timeline-item.right { /* Reset right-side specific positioning */
+        left: 0 !important;
+        padding-left: 50px; /* Match left padding */
+    }
+     /* No need to override ::after or ::before specifically for right on mobile */
+}
+
+#hero h1 {
+    /* font-family: 'Poppins', sans-serif; /* REMOVED - Inherit default heading font */
+    /* font-family: 'Hey Elsie Cute', cursive; /* Removed specific font */
+    font-size: calc(4rem + 10px); /* Reduced font size by 10px */
+    margin-bottom: 0.1em; /* Reduced bottom margin */
+    text-transform: uppercase; /* Display text in uppercase */
+    position: relative; /* Allow relative positioning */
+    top: 10px; /* Move down by 10px */
+    /* color: var(--color-primary-accent); /* REMOVED - Inherits from #hero */
+    max-width: 800px; /* Limit width */
+}
+
+/* Style the new h2 */
+#hero h2 {
+    /* font-family: 'Poppins', sans-serif; /* REMOVED - Inherit default heading font */
+    /* font-family: 'Hey Elsie Regular', cursive; /* Removed specific font */
+    font-size: var(--h2-font-size); /* Use variable */
+    margin-bottom: 0.5em; /* Keep original margin */
+    font-weight: normal; /* Make h2 less prominent than h1 */
+    line-height: 1.3; /* Adjust line height for multi-line h2 */
+    max-width: 800px; /* Limit width */
+}
+
+/* Highlight specific text in hero h2 */
+#hero h2 .highlight-crypto {
+    color: #FAF1E7; /* Set specific color */
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5em;
+    max-width: 600px; /* Limit width */
+}
+
+#hero .cta-button {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+}
+
+#hero .cta-button:hover {
+    background-color: var(--color-white); /* Use white background on hover */
+    color: var(--color-primary-accent); /* Use primary accent text color on hover */
+    text-decoration: none;
+}
+
+/* About Section Styles */
+#about {
+    /* max-width: 800px; /* Removed max-width */
+    /* margin: 0 auto; /* Removed margin auto */
+    text-align: center; /* Keep text centered */
+    background-color: #D8BC9F; /* Match vision background */
+    padding-top: 100px; /* Add padding for divider above */
+    padding-bottom: 60px; /* Reduced bottom padding to 60px */
+    position: relative; /* Needed for z-index stacking */
+    z-index: 1; /* Lower z-index than divider */
+}
+
+#about h2 { /* This rule might become redundant or need adjustment */
+     /* margin-bottom: 1em; /* Removed, handled by grouped rule */
+     /* margin-top: 50px; /* REMOVED - Heading is no longer direct child */
+     /* margin-bottom is handled by the grouped rule */
+}
+
+/* New styles for the two-column layout in #about */
+.about-container {
+    display: flex;
+    align-items: center; /* Vertically center items */
+    gap: 100px; /* Space between text and image */
+    max-width: 1000px; /* Increased overall width to 1000px */
+    margin: 60px auto 30px auto; /* Changed bottom margin to 30px */
+    text-align: left; /* Reset text-align from #about */
+}
+
+.about-text {
+    flex: 1; /* Allow text to take available space */
+    text-align: right; /* Align text to the right as requested */
+    padding-right: 20px; /* Add some padding to the right of the text */
+}
+
+/* Style the H1 specifically within .about-text */
+.about-text h1 { /* Changed from h2 to h1 */
+    text-align: right; /* Ensure heading is right-aligned */
+    margin-top: 0; /* Remove any default top margin */
+    margin-bottom: 20px; /* Reverted bottom margin to 20px */
+    /* Reapply styles from the original grouped rule */
+    font-size: var(--h1-font-size); /* Use variable */
+    font-weight: normal;
+    line-height: 1.3;
+    color: var(--color-primary-accent);
+    text-transform: uppercase;
+}
+
+/* Style the button specifically within .about-text */
+.about-text .cta-button {
+    margin-top: 20px; /* Add space above the button */
+    /* Apply header button styles */
+    background-color: var(--color-primary-accent); /* Inverted: Red background */
+    color: var(--color-white); /* Inverted: White text */
+    font-size: var(--button-font-size); /* Use variable */
+    /* box-shadow removed */
+    /* It inherits text-align: right from .about-text because it's inline-block */
+}
+
+/* Add hover styles for the about button */
+.about-text .cta-button:hover {
+     background-color: var(--color-white); /* Inverted: White background */
+     color: var(--color-primary-accent); /* Inverted: Red text */
+     text-decoration: none;
+}
+
+.about-image {
+    flex: 0 0 40%; /* Set a fixed basis for the image container (e.g., 40%) */
+    max-width: 40%; /* Ensure it doesn't exceed 40% */
+    text-align: center; /* Center image within its container */
+}
+
+.about-image img {
+    max-width: 100%; /* Make image responsive */
+    height: auto;
+    border-radius: 10px; /* Optional rounded corners */
+    box-shadow: 0 0 50px 15px #FAF1E7; /* Reverted color, adjusted blur/spread */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+    animation: pulse 2s infinite alternate ease-in-out; /* Add pulsing animation */
+}
+
+/* Keyframes for the pulsing animation */
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.08); /* Further increased scale for stronger pulse */
+    }
+}
+
+/* Add hover effect for zoom, keeping the existing shadow */
+.about-image img:hover {
+    transform: scale(1.05); /* Slightly zoom in */
+    /* Keep the existing shadow color #FAF1E7 */
+    box-shadow: 0 0 25px 15px #FAF1E7; /* Reverted color, adjusted blur/spread */
+    cursor: none; /* Ensure custom cursor remains */
+}
+
+/* Responsive adjustments for #about */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column; /* Stack text and image vertically */
+        text-align: center; /* Center text on small screens */
+    }
+
+    .about-text {
+        text-align: center; /* Center text when stacked */
+        padding-right: 0; /* Remove right padding */
+        margin-bottom: 30px; /* Add space below text when stacked */
+    }
+
+    .about-image {
+        flex-basis: auto; /* Reset flex basis */
+        max-width: 80%; /* Allow image to be wider when stacked */
+    }
+}
+
+
+/* How it works Section Styles */
+#how-it-works {
+    position: relative; /* Added: Make this the positioning context for the balloon */
+    max-width: 1500px; /* Increased width to 1500px */
+    margin: 0 auto; /* Center the section */
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack steps vertically */
+    /* Default align-items is stretch, which is fine */
+}
+
+#how-it-works h2 {
+    /* Styles moved to the grouped rule below */
+}
+
+/* Style the process steps container if needed */
+/* New styles for alternating layout */
+.process-step {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 40px; /* Space between image and text */
+    margin-bottom: 100px; /* Set space between steps to 100px */
+    /* Removed border, padding, background from the main step container */
+}
+
+/* Define the layout variations */
+/* Default is row (image left, text right), handled by .process-step display:flex */
+/* .layout-image-left rule removed as it's the default */
+
+.layout-image-right {
+    flex-direction: row-reverse; /* Reverse order: text, image */
+}
+
+/* Style for the image container */
+.step-image {
+    flex: 1; /* Adjust flex basis as needed, e.g., flex: 0 0 40%; */
+    max-width: 40%; /* Limit image container width */
+    text-align: center; /* Center image within its container */
+}
+
+.step-image img {
+    max-width: 100%; /* Make image responsive */
+    height: auto;
+    border-radius: 10px; /* Optional rounded corners for images */
+    box-shadow: 0 0 30px 10px #D8BC9F; /* Applied shine effect with specified color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+/* Add hover effect for zoom and shadow */
+.step-image img:hover {
+    transform: scale(1.05); /* Slightly zoom in */
+    box-shadow: 0 0 45px 15px #c9a98f; /* Enhance shadow on hover - slightly darker/more spread */
+    cursor: none; /* Ensure custom cursor remains */
+}
+
+/* Style for the text container */
+.step-text {
+    flex: 1; /* Adjust flex basis as needed, e.g., flex: 1 1 60%; */
+    /* Order properties removed */
+}
+
+.step-text h3 {
+    color: var(--color-primary-accent); /* Accent color for step titles */
+    margin-bottom: 0.5em;
+    font-size: var(--h3-font-size); /* Use variable */
+}
+
+.step-text p {
+    line-height: 1.7; /* Improve text readability */
+}
+
+.step-text p em { /* Style the italicized humorous parts */
+    color: var(--color-primary-accent); /* Changed color to primary accent */
+    font-style: normal; /* Keep it readable, maybe just color difference */
+}
+
+/* Remove old .nlsa-image specific styles */
+/* .nlsa-image { ... } */
+
+/* Responsive adjustments for alternating layout */
+@media (max-width: 768px) {
+    .process-step { /* Apply column direction to all steps on small screens */
+        flex-direction: column; /* Stack image and text vertically */
+        text-align: center; /* Center text on small screens */
+    }
+    /* Removed redundant .layout-image-right selector here */
+
+    .step-image,
+    .step-text {
+        max-width: 90%; /* Allow more width when stacked */
+        flex: 1 1 auto; /* Reset flex basis */
+    }
+
+    .step-image {
+        margin-bottom: 20px; /* Add space below image when stacked */
+    }
+
+    /* Order properties removed from responsive section */
+    /* Flex direction column handles stacking */
+}
+
+/* Specific text alignment for Step 2 */
+#how-it-works .process-step:nth-of-type(2) .step-text {
+    text-align: right; /* Align text content to the right */
+}
+
+/* Testimonials Section Styles */
+#testimonials {
+    background-color: var(--color-white); /* Optional different background */
+    /* Consider adding max-width and centering like other sections */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#testimonials h2 {
+    /* Styles moved to the grouped rule below */
+}
+
+#testimonials blockquote {
+    margin-bottom: 2em;
+    padding: 20px;
+    border-left: 5px solid var(--color-secondary-accent); /* Accent border */
+    background-color: var(--color-background); /* Match main background or keep white */
+    border-radius: 5px;
+}
+
+#testimonials blockquote p {
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+
+#testimonials blockquote footer {
+    font-style: normal;
+    font-weight: bold;
+    color: var(--color-primary-accent);
+}
+
+/* Roadmap Section Styles */
+#roadmap {
+    max-width: 800px; /* Limit width */
+    margin: 0 auto; /* Center */
+    padding-top: 150px; /* Set top padding to 150px */
+}
+
+#roadmap h2 {
+    /* Styles moved to the grouped rule below */
+}
+
+#roadmap ul {
+    list-style: none;
+    padding-left: 20px; /* Indent for timeline effect */
+    position: relative;
+}
+
+/* Basic timeline line */
+#roadmap ul::before {
+    content: '';
+    position: absolute;
+    left: 5px; /* Adjust position */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-secondary-accent); /* Use accent color */
+}
+
+#roadmap li {
+    margin-bottom: 2em;
+    position: relative;
+    padding-left: 30px; /* Space for the dot */
+}
+
+/* Timeline dot */
+#roadmap li::before {
+    content: '';
+    position: absolute;
+    left: -1px; /* Position over the line */
+    top: 5px; /* Adjust vertical alignment */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-primary-accent); /* Use primary accent */
+    border: 2px solid var(--color-background); /* Match background for cutout effect */
+}
+
+#roadmap li strong { /* Style the date/quarter */
+    display: block;
+    font-weight: bold;
+    color: var(--color-primary-accent);
+}
+
+/* Platform Section Styles */
+/* Platform Section Styles */
+#platform {
+    max-width: 800px; /* Limit width */
+    margin: 0 auto; /* Center */
+    text-align: center;
+}
+
+#platform h2 {
+    margin-bottom: 1em;
+}
+
+#platform p {
+    margin-bottom: 1.5em;
+}
+
+#platform button:disabled { /* Specific style for the disabled button */
+    background-color: #aaa; /* Darker gray */
+    color: #eee;
+    cursor: not-allowed;
+}
+
+/* Footer Styles */
+#footer {
+    background-color: var(--color-white); /* Different background for footer? */
+    padding: 20px; /* Restore original padding */
+    /* border-top: 1px solid #eee; /* Removed border */
+    margin-top: 40px; /* Restore original margin-top */
+    position: relative; /* Needed for z-index */
+    z-index: 1; /* Lower than divider */
+}
+
+#footer .logo span,
+#footer nav ul li a {
+    font-size: 0.9rem; /* Smaller font size in footer */
+    cursor: none; /* Added to remove hand cursor */
+}
+
+#footer .logo img { /* Style the footer logo image */
+    max-height: 30px; /* Slightly smaller in footer */
+    width: auto;
+    vertical-align: middle;
+}
+
+#footer nav { /* Reuse header nav styles, maybe adjust later */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px;
+}
+
+#footer .social-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#footer .social-links a {
+    /* Style social icons later (size, color) */
+    font-size: 1.2rem; /* Example size */
+    color: var(--color-secondary-accent); /* Use secondary accent */
+    cursor: none; /* Added to remove hand cursor */
+}
+
+#footer .social-links a:hover {
+    color: var(--color-primary-accent); /* Primary accent on hover */
+    text-decoration: none;
+}
+
+/* Custom Cursor Styles */
+body {
+    cursor: none; /* Hide default cursor */
+}
+
+/* Main custom cursor element (the heart image) */
+.custom-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 10001; /* Increased z-index to be above balloon */
+    width: 24px; /* Set width for the image */
+    height: 24px; /* Set height for the image */
+    background-image: url('assets/images/herz_cursor.png');
+    background-repeat: no-repeat;
+    background-size: contain; /* Ensure image fits within bounds */
+    transform: translate(-50%, -50%); /* Center the image */
+    opacity: 0.9; /* Slightly increased opacity */
+    /* mix-blend-mode: difference; /* REMOVED blend mode */
+    /* Removed text-specific properties: color, font-size, line-height */
+}
+
+/* Trailing swarm elements (heart images) */
+.cursor-swarm-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 10000; /* Increased z-index to be above balloon (but below main cursor) */
+    /* Removed border-radius and background-color */
+    background-image: url('assets/images/herz_cursor.png'); /* Use the same heart image */
+    background-repeat: no-repeat;
+    background-size: contain; /* Ensure image fits within bounds */
+    transform: translate(-50%, -50%); /* Center the image */
+    transition: transform 0.2s ease-out, opacity 0.3s ease-out; /* Slower transition for trailing effect */
+    opacity: 0.7; /* Keep opacity */
+    /* mix-blend-mode: difference; /* REMOVED blend mode */
+    /* Width and height will be set dynamically in JS */
+    /* Removed text-specific properties: color, line-height */
+}
+
+/* Scroll Animation Styles */
+/* .fade-in-section class is now only used for non-#vision sections if needed, */
+/* but the effect itself is removed here. JS logic for #vision is also removed. */
+/* If other sections still need fade-in, we might need a different class */
+/* or restore parts of this selectively. For now, applying slide-up globally: */
+.fade-in-section {
+    opacity: 0; /* Start hidden */
+    transform: translateY(50px); /* Start slightly lower */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Smooth transition */
+}
+
+/* Target state when element becomes visible */
+.fade-in-section.is-visible {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to final position */
+}
+
+/* --- Slide-up staggered animation REMOVED --- */
+
+/* Slide-in animation base styles for steps */
+#how-it-works .process-step {
+    opacity: 0; /* Start invisible */
+    transition: transform 1.4s ease-in-out, opacity 1s ease-in-out; /* Slower, smoother transition for both */
+    /* Set initial transformed state */
+}
+#how-it-works .slide-from-left {
+    transform: translateX(-100%); /* Start completely off-screen left */
+}
+#how-it-works .slide-from-right {
+    transform: translateX(100%); /* Start completely off-screen right */
+}
+
+/* Target state when element becomes visible */
+#how-it-works .process-step.is-visible { /* Target individual step */
+    transform: translateX(0);
+    opacity: 1; /* Fade in */
+    /* Transition is now defined in the base state */
+}
+
+/* Staggered delay rules removed */
+
+/* Rising Hearts Animation Styles */
+.rising-heart {
+    position: absolute; /* Position relative to nearest positioned ancestor (likely body or header) */
+    bottom: 0; /* Start near the bottom (adjust based on desired origin) */
+    left: 50%; /* Start horizontally centered, JS will randomize */
+    pointer-events: none;
+    /* z-index: 5; /* Removed z-index */
+    /* font-size: 30px; /* REMOVED: Size set by JS width/height */
+    /* color: var(--color-primary-accent); /* REMOVED: Using background image */
+    background-image: url('assets/images/herz_cursor.png'); /* Use cursor image */
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.2; /* Reduced base opacity */
+    animation: riseAndFade 8s linear infinite; /* Slowed down animation */
+}
+
+@keyframes riseAndFade {
+    0% {
+        transform: translateY(0) translateX(-50%); /* Start at bottom, centered */
+        opacity: var(--start-opacity, 0.2); /* Match reduced base opacity */
+    }
+    25% {
+        transform: translateY(-20vh) translateX(calc(-50% - 15px)); /* Move up and sway left */
+    }
+    50% {
+        transform: translateY(-40vh) translateX(calc(-50% + 15px)); /* Move up and sway right */
+    }
+    75% {
+        transform: translateY(-60vh) translateX(calc(-50% - 10px)); /* Move up and sway left again */
+    }
+    100% {
+        transform: translateY(-80vh) translateX(-50%); /* Move up to final position, centered */
+        opacity: 0;
+    }
+}
+
+/* --- Herzchen-Explosion bei Klick --- */
+.click-heart {
+    position: fixed; /* Use fixed positioning */
+    pointer-events: none; /* Ignore mouse events */
+    z-index: 10000; /* Ensure it's on top */
+    /* Size is now set inline by JS */
+    /* width: 50px; */ /* Removed fixed width */
+    /* height: 50px; */ /* Removed fixed height */
+    opacity: 0.8; /* Initial opacity for the container */
+    /* Animation is now handled by JavaScript */
+    /* animation: explodeHeart 3s ease-out forwards; */
+    /* Remove background properties from the container */
+    transform: scale(1); /* Start at normal size (JS will handle animation) */
+}
+
+/* New style for the inner element containing the image and rotation */
+.click-heart-inner {
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/images/herz_cursor.png'); /* Use cursor image */
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* Rotation is applied inline via JS */
+}
+
+
+/* Animation keyframes removed, handled by JavaScript */
+/* @keyframes explodeHeart { ... } */
+/* --- Ende Herzchen-Explosion --- */
+
+/* Contract Address Styles (Moved & Resized) */
+.contract-address-container {
+    /* Removed absolute positioning */
+    /* position: absolute; */
+    /* bottom: 100px; */
+    /* right: 275px; */
+    z-index: 10;
+    /* Removed display:flex and justify-content */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* width: 100%; /* REMOVED width 100% */
+    /* margin-top: -50px; /* REMOVED negative margin */
+    padding-top: 80px; /* Add desired space above */
+    margin-bottom: 30px; /* Reduced space below */
+    position: relative; /* Needed for z-index */
+    /* Container itself doesn't need width/centering, inner one does */
+}
+
+.ca-inner-container { /* Added inner container for background, padding, shadow */
+    display: flex;
+    align-items: center;
+    background-color: #FAF1E7; /* Changed background color */
+    padding: 12px 30px; /* Increased padding (~+4px top/bottom, +8px left/right) */
+    border-radius: 12px; /* Increased radius */
+    box-shadow: 0 0 15px 3px #D8BC9F; /* Changed shadow color */
+    max-width: 725px; /* Set maximum width */
+    /* width: 90%; /* REMOVED percentage width */
+    margin-left: auto; /* Ensure centering of the inner container */
+    margin-right: auto; /* Ensure centering of the inner container */
+    /* width: fit-content; /* REMOVED fit-content, rely on max-width and margin auto */
+}
+
+/* Wrapper for CA, Social, Balloon */
+.ca-social-balloon-wrapper {
+    position: relative; /* Make this the reference for absolute positioning */
+    /* Center the wrapper itself if needed, similar to ca-inner-container */
+    max-width: 725px; /* Match inner container width for centering */
+    margin-left: auto;
+    margin-right: auto;
+    /* Add padding/margin if balloon needs space outside CA/Social */
+    padding-left: 100px; /* Example: Add space on the left for the balloon */
+}
+
+
+/* SVG Divider Styles */
+.section-divider,
+.footer-divider { /* Grouped styles for both dividers */
+    position: relative;
+    height: 100px; /* Example height */
+    line-height: 0; /* Prevent extra space */
+    overflow: visible; /* Allow SVG to potentially overflow slightly if needed */
+}
+
+.section-divider {
+    margin-bottom: -100px; /* Negative margin equal to height to pull section up */
+    z-index: 5; /* Higher than the section below */
+}
+
+.footer-divider {
+    margin-bottom: -1px; /* Pull footer up slightly to prevent gap */
+    z-index: 5; /* Ensure it's above footer background */
+    transform: scaleY(-1); /* Flip vertically */
+    position: relative; /* Keep relative positioning */
+    z-index: 5; /* Ensure it's above footer background */
+}
+
+
+.section-divider svg,
+.footer-divider svg { /* Grouped styles for SVGs */
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Flip the SVG horizontally for the dividers around the #about section */
+.about-divider svg {
+    transform: scaleX(-1);
+}
+
+
+.ca-prefix {
+    font-family: 'Poppins', sans-serif;
+    font-size: calc(1.3rem + 15px); /* Increased font size (~+40-50%) */
+    font-weight: bold;
+    color: var(--color-primary-accent);
+    margin-right: 12px; /* Increased margin */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.address-box {
+    display: flex;
+    align-items: stretch;
+    flex-grow: 1;
+    min-width: 0; /* Allow shrinking */
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-primary-accent); /* Slightly thicker border */
+    border-radius: 8px; /* Increased radius */
+    padding: 0;
+    overflow: hidden;
+}
+
+#contractAddress {
+    flex-grow: 1;
+    font-family: monospace;
+    font-size: 1.3rem; /* Increased font size (~+45%) */
+    color: var(--color-text);
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px 15px; /* Increased padding */
+    text-align: center;
+}
+
+.copy-button {
+    padding: 8px 15px; /* Increased padding */
+    font-family: var(--button-font-family); /* Use variable */
+    font-size: var(--button-font-size); /* Use variable */
+    background-color: var(--color-primary-accent);
+    color: #FFF6F1;
+    border: none;
+    border-radius: 0 0px 0px 0; /* Adjusted radius */
+    cursor: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    margin-left: -2px;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.copy-button:hover {
+    background-color: var(--color-white); /* Use white background on hover */
+    color: var(--color-primary-accent); /* Use primary accent text color on hover */
+}
+
+/* Our Vision Section Styles - Updated Design */
+#vision {
+    background-color: #D8BC9F; /* New background color */
+    padding-top: 100px; /* Padding equal to divider height */
+    padding-bottom: 150px; /* Keep bottom padding */
+    position: relative; /* Needed for z-index stacking AND absolute positioning of children */
+    /* z-index: 10; /* Removed z-index from section, relying on balloon's z-index */
+}
+
+/* Grouped rule for all section headings below hero */
+#vision h1, /* Changed from h2 */
+#how-it-works h1, /* Changed from h2 */
+/* #about h1, /* Removed from grouped rule as it's now inside .about-text */
+#roadmap h1, /* Changed from h2 */
+#platform h1, /* Changed from h2 */
+#testimonials h1 { /* Changed from h2 */
+    font-size: var(--h1-font-size); /* Use variable */
+    font-weight: normal; /* Match hero h2 weight */
+    line-height: 1.3; /* Match hero h2 line height */
+    color: var(--color-primary-accent); /* Match hero h2 color */
+    margin-bottom: 100px; /* Set bottom margin to 100px */
+    text-align: center; /* Keep centered alignment */
+    text-transform: uppercase; /* Make headings uppercase */
+}
+/* Specific padding/margin for vision h2 */
+#vision h2 {
+     /* padding-top: 150px; /* REMOVED */
+     margin-top: 50px; /* Add margin to create space below the divider area */
+     /* Removed specific margin-bottom to inherit from new rule below */
+}
+
+/* Increased margin-bottom for specific sections */
+#vision h2,
+#how-it-works h2,
+#roadmap h2 {
+    margin-bottom: 75px;
+}
+
+.vision-container {
+    display: flex;
+    justify-content: space-around; /* Distribute space */
+    align-items: stretch; /* Make blocks equal height */
+    gap: 30px; /* Space between blocks */
+    max-width: 1200px;
+    margin: 0 auto; /* Removed top margin */
+}
+
+.vision-block {
+    flex: 1; /* Allow blocks to share space */
+    max-width: 30%; /* Limit width, adjust as needed with gap */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 0 30px 10px #FAF1E7; /* Further increased blur and spread, removed offset */
+    text-align: left; /* Align text left */
+    display: flex; /* Use flex for internal alignment */
+    flex-direction: column; /* Stack content vertically */
+    position: relative; /* Needed for pseudo-elements */
+    /* overflow: hidden; <-- MUST NOT be hidden for outer glow */
+    z-index: 1; /* Ensure block is above pseudo-elements */
+    /* border: 2px solid transparent; /* REMOVED transparent border */
+    /* New styles for hover effect */
+    position: relative; /* Needed for absolute positioning of blob */
+    /* overflow: hidden; /* Clip the blob - REMOVED TO ALLOW SHADOW */
+    /* padding: 3px; /* REMOVED */
+    background-color: var(--color-white); /* Set static white background here */
+    /* Keep existing border-radius: 15px; */
+    /* Keep existing box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); */ /* Old comment */
+    transition: transform 0.3s ease; /* Add transition for scaling */
+}
+
+/* Add hover effect for scaling */
+.vision-block:hover {
+    transform: scale(1.03); /* Scale up slightly on hover */
+}
+
+/* REMOVED Hover effect rules */
+/* .vision-block:hover { ... } */
+/* .vision-block::before { ... } */
+/* .vision-block:hover::before { ... } */
+/* @keyframes magicBorder { ... } */
+
+/* New styles for the inner content wrapper */
+.vision-content {
+    position: relative; /* To stack above the blob */
+    z-index: 2; /* Ensure content is above blob */
+    background-color: transparent; /* Content area is now transparent */
+    padding: 25px; /* Keep existing padding */
+    border-radius: 12px; /* Slightly smaller radius than parent */
+    height: 100%; /* Restore height */
+    box-sizing: border-box;
+    transition: background-color 0.4s ease; /* Smooth transition on hover */
+    display: flex; /* Use flex for internal alignment */
+    flex-direction: column; /* Stack content vertically */
+    text-align: left; /* Align text left */
+}
+
+/* REMOVED hover rule for content background */
+
+/* Styles for the moving blob */
+.vision-blob {
+    position: absolute;
+    z-index: 1; /* Behind content, above block background */
+    top: 0; /* Positioned by JS */
+    left: 0; /* Positioned by JS */
+    width: 200px; /* Size of the glow */
+    height: 200px; /* Size of the glow */
+    background: radial-gradient(circle, rgba(216, 188, 159, 0.7) 0%, rgba(216, 188, 159, 0) 70%); /* Changed color to #D8BC9F gradient */
+    border-radius: 50%; /* Make it round */
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Ignore mouse events */
+    transition: opacity 0.4s ease; /* Fade in/out */
+    transform: translate(-50%, -50%); /* Center on JS coordinates */
+}
+
+/* Make blob visible on block hover */
+.vision-block:hover .vision-blob {
+    opacity: 1;
+}
+
+.vision-icon {
+    /* Style for the icon image itself */
+    max-width: 75px; /* Icon size increased */
+    height: 75px; /* Keep it square */
+    padding: 8px; /* Padding around the icon for the background */
+    background-color: #D8BC9F; /* Changed background to #D8BC9F */
+    border-radius: 8px; /* Rounded corners for the background */
+    margin-bottom: 20px; /* Space below icon */
+    display: block; /* Ensure block display */
+    object-fit: contain; /* Make sure icon fits inside padding */
+}
+
+.vision-block h3 {
+    font-size: 1.3em; /* Sub-heading size */
+    color: var(--color-primary-accent); /* Beerenrot */
+    margin-bottom: 15px; /* Space below heading */
+    text-align: left; /* Align left */
+    position: relative; /* Needed for pseudo-element */
+    padding-bottom: 8px; /* Space for the underline */
+}
+
+/* Decorative underline for H3 */
+.vision-block h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px; /* Underline width */
+    height: 3px; /* Underline thickness */
+    background-color: var(--color-primary-accent); /* Beerenrot */
+    /* Optional gradient: */
+    /* background: linear-gradient(to right, var(--color-primary-accent), var(--color-secondary-accent)); */
+    border-radius: 1.5px; /* Rounded ends */
+}
+
+
+.vision-block p {
+    font-size: 0.95rem; /* Text size */
+    font-size: 0.95rem; /* Text size */
+    text-align: left; /* Align left */
+    flex-grow: 1; /* Allow paragraph to fill remaining space */
+    color: var(--color-text); /* Standard text color */
+    line-height: 1.5; /* Improve readability */
+    /* Ensure icon, h3, p inherit color or set explicitly if needed */
+    color: var(--color-white); /* Make text white for contrast */
+}
+
+/* Ensure h3 and icon styles work with the new structure */
+.vision-content .vision-icon {
+    /* Styles should remain the same */
+    max-width: 75px;
+    height: 75px;
+    padding: 8px;
+    background-color: #D8BC9F; /* Changed background to #D8BC9F */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: block;
+    object-fit: contain;
+}
+
+.vision-content h3 {
+    /* Styles should remain the same */
+    font-size: var(--h3-font-size); /* Use variable */
+    color: var(--color-primary-accent);
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.vision-content h3::after {
+    /* Styles should remain the same */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--color-primary-accent);
+    border-radius: 1.5px;
+}
+
+.vision-content p {
+    /* Styles should remain the same */
+    font-size: inherit; /* Ensure font size is inherited from body */
+    text-align: left;
+    flex-grow: 1;
+    color: var(--color-text); /* CHANGE: Back to standard text color */
+    line-height: 1.5;
+}
+
+
+/* Responsive adjustments for vision blocks */
+@media (max-width: 768px) {
+    .vision-container {
+        flex-direction: column; /* Stack vertically */
+        align-items: center; /* Center stacked blocks */
+    }
+
+    .vision-block {
+        max-width: 90%; /* Wider blocks on small screens */
+        margin-bottom: 30px; /* Space between stacked blocks */
+        height: auto; /* Ensure height adjusts */
+    }
+
+    .vision-block:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* --- Slide-up Animation for Vision Blocks --- */
+.vision-block {
+    /* ... existing styles ... */
+    opacity: 0; /* Start hidden */
+    transform: translateY(50px); /* Start slightly lower */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth transition */
+}
+
+.vision-block.is-visible {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to final position */
+}
+
+/* Staggered delay */
+.vision-block:nth-child(1).is-visible {
+    transition-delay: 0.1s;
+}
+.vision-block:nth-child(2).is-visible {
+    transition-delay: 0.2s;
+}
+.vision-block:nth-child(3).is-visible {
+    transition-delay: 0.3s;
+}
+/* --- End Slide-up Animation --- */
+
+
+/* Social Media Banner Section */
+.social-banner-container {
+    max-width: 1200px; /* Maximale Breite */
+    margin: 85px auto; /* Zentrierung und vertikaler Abstand */
+    padding: 0 15px; /* Optional: Etwas Innenabstand links/rechts */
+}
+
+.social-links-wrapper {
+    display: flex;
+    justify-content: space-around; /* Gleichmäßiger Abstand, auch an den Rändern */
+    /* Alternative: justify-content: space-between; /* Kein Abstand an den Rändern */
+    align-items: center; /* Vertikale Zentrierung */
+    flex-wrap: wrap; /* Umbruch bei kleineren Bildschirmen */
+    gap: 15px; /* Abstand zwischen den Elementen, falls sie umbrechen */
+}
+
+.social-links-wrapper a {
+    display: inline-block; /* Verhindert unerwünschte Abstände */
+    transition: transform 0.3s ease; /* Only transition transform */
+    cursor: none; /* Use custom cursor */
+    /* Removed border-radius and box-shadow */
+}
+
+.social-links-wrapper a:hover {
+    transform: scale(1.1); /* Leichte Vergrößerung beim Hover */
+    text-decoration: none; /* Remove underline on hover */
+    /* Removed box-shadow */
+}
+
+.social-links-wrapper img {
+    display: block; /* Verhindert unerwünschte Abstände unter dem Bild */
+    max-height: 100px; /* Beispiel: Maximale Höhe begrenzen, anpassen nach Bedarf */
+    transition: filter 0.3s ease; /* Add transition for filter */
+    /* Stacked drop-shadows for more intensity */
+    filter: drop-shadow(0 0 8px #D8BC9F) drop-shadow(0 0 15px rgba(216, 188, 159, 0.5)); /* Changed shadow color */
+    width: auto; /* Automatische Breite basierend auf der Höhe */
+}
+
+.social-links-wrapper a:hover img {
+    /* Stronger stacked drop-shadows on hover */
+    filter: drop-shadow(0 0 12px #D8BC9F) drop-shadow(0 0 25px #D8BC9F); /* Changed shadow color */
+}
+
+/* Media Query for smaller screens (e.g., laptops) */
+@media (max-width: 1640px) {
+    .hero-content {
+        margin-right: 0px; /* Drastically reduce right margin for testing */
+        max-width: 60%; /* Allow content to take more width */
+    }
+}
+
+/* --- Scroll to Top Button --- */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px; /* Quadratische Größe */
+    height: 50px; /* Quadratische Größe */
+    padding: 0; /* Kein Innenabstand, da SVG zentriert wird */
+    background-color: var(--color-primary-accent); /* Roter Hintergrund */
+    color: var(--color-white); /* Weißes Icon */
+    border: none;
+    border-radius: 8px; /* Leicht abgerundete Ecken */
+    cursor: none; /* Benutzerdefinierter Cursor */
+    z-index: 1000; /* Über anderen Elementen */
+    display: flex; /* Für Zentrierung des SVG */
+    justify-content: center; /* Horizontale Zentrierung */
+    align-items: center; /* Vertikale Zentrierung */
+    opacity: 0; /* Startet unsichtbar */
+    transform: scale(0.5); /* Startet klein für "Aufplopp"-Effekt */
+    transition: opacity 0.3s ease-in-out, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Übergang für Sichtbarkeit und Aufplopp */
+    visibility: hidden; /* Startet komplett versteckt */
+}
+
+#scrollToTopBtn.visible {
+    opacity: 1;
+    transform: scale(1); /* Normale Größe */
+    visibility: visible; /* Sichtbar machen */
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--color-secondary-accent); /* Hover-Farbe */
+}
+
+#scrollToTopBtn svg {
+    width: 28px; /* Größe des SVG-Icons anpassen */
+    height: 28px;
+    fill: currentColor; /* Nimmt die Farbe des Buttons (weiß) */
+}
+
+/* --- Balloon Styles --- */
+
+/* General Balloon Styles (shared properties) */
+.balloon {
+    position: absolute; /* Position relative to the nearest positioned ancestor */
+    background-image: url('assets/images/ballon_click_me.png'); /* Corrected path */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: none; /* Use custom cursor */
+    z-index: 10002; /* Ensure balloon is above cursor/hearts/messages and dividers */
+    transition: transform 0.3s ease, opacity 0.5s ease-out; /* Smooth transitions for scale/rotate AND opacity for reappearing */
+    transform-origin: center center;
+    pointer-events: auto; /* Explicitly enable pointer events */
+    /* Default size and rotation variables - can be overridden by specific IDs */
+    width: 250px;
+    height: 250px;
+    --initial-rotation: -15deg;
+    --current-rotation: var(--initial-rotation);
+    --current-scale: 1;
+    /* Default transform - will be overridden by specific IDs */
+    transform: translate(-50%, -50%) rotate(var(--current-rotation)) scale(var(--current-scale));
+}
+
+/* --- Hero Balloon (#hero-balloon-1) --- */
+#hero-balloon-1 {
+    /* Position relative to #hero */
+    top: 35%; /* Adjusted vertical position (moved up) */
+    left: 80%; /* Adjusted horizontal position (moved right) */
+    /* Simpler transform as it's relative to #hero */
+    transform: translate(-50%, -50%) rotate(var(--current-rotation)) scale(var(--current-scale));
+    /* Specific size/rotation */
+    width: 220px;
+    height: 220px;
+    --initial-rotation: 5deg; /* Example: Different angle */
+}
+/* --- End Hero Balloon --- */
+
+/* --- Test Balloon (#test-balloon) --- */
+#test-balloon {
+    /* Position relative to .ca-social-balloon-wrapper */
+    top: 60%; /* Vertical position */
+    left: 50%; /* Horizontal reference point */
+    /* Specific transform for test-balloon */
+    transform: translate(calc(-50% - 650px), -50%) rotate(var(--current-rotation)) scale(var(--current-scale));
+    /* Specific size/rotation for test-balloon (can override defaults if needed) */
+    width: 250px;
+    height: 250px;
+    --initial-rotation: -15deg;
+}
+/* --- End Test Balloon --- */
+
+/* --- Vision Balloon (#vision-balloon-1) --- */
+#vision-balloon-1 {
+    /* Position relative to #vision */
+    top: 15%; /* Example: Near top */
+    left: 90%; /* Example: Near right */
+    /* Simpler transform as it's relative to #vision */
+    transform: translate(-50%, -50%) rotate(var(--current-rotation)) scale(var(--current-scale));
+    /* Specific size/rotation for vision-balloon-1 */
+    width: 200px; /* Example: Smaller */
+    height: 200px; /* Example: Smaller */
+    --initial-rotation: 10deg; /* Example: Different angle */
+    z-index: 11; /* Ensure this specific balloon is above the section and preceding divider */
+}
+/* --- End Vision Balloon --- */
+
+/* --- How It Works Balloon (#how-it-works-balloon-1) --- */
+#how-it-works-balloon-1 {
+    /* Position relative to #how-it-works */
+    top: 18%; /* Vertical position near heading */
+    left: 50%; /* Reference point: center of the section */
+    /* Use transform to shift left and up from the center */
+    transform: translate(calc(-50% - 450px), calc(-50% - 250px)) rotate(var(--current-rotation)) scale(var(--current-scale)); /* Shift left by 450px and up by 250px from center */
+    /* Specific size/rotation */
+    width: 175px;
+    height: 175px;
+    --initial-rotation: -8deg; /* Example rotation */
+    z-index: 11; /* Ensure it's above section content */
+}
+/* --- End How It Works Balloon --- */
+
+/* --- How It Works Balloon 2 (#how-it-works-balloon-2) --- */
+#how-it-works-balloon-2 {
+    /* Position relative to #how-it-works */
+    top: 92%; /* Position below Step 3 */
+    left: 60%; /* Reference point: center of the section */
+    /* Use transform to shift right from the center */
+    transform: translate(calc(-50% + 450px), -50%) rotate(var(--current-rotation)) scale(var(--current-scale)); /* Shift right by 450px from center */
+    /* Specific size/rotation */
+    width: 225px; /* New size */
+    height: 225px; /* New size */
+    --initial-rotation: 12deg; /* Example rotation */
+    z-index: 11; /* Ensure it's above section content */
+}
+/* --- End How It Works Balloon 2 --- */
+
+/* --- Roadmap Balloon (#roadmap-balloon-1) --- */
+#roadmap-balloon-1 {
+    /* Position relative to #roadmap */
+    top: 6%; /* Position near the top (Reference point) */
+    left: 5%; /* Position towards the left (Reference point) */
+    /* Adjusted transform to move 250px left and 50px up */
+    transform: translate(calc(-50% - 250px), calc(-50% - 50px)) rotate(var(--current-rotation)) scale(var(--current-scale));
+    /* Specific size/rotation */
+    width: 175px; /* User specified size */
+    height: 175px; /* User specified size */
+    --initial-rotation: -10deg; /* Example rotation */
+    z-index: 11; /* Ensure it's above section content */
+}
+/* --- End Roadmap Balloon --- */
+
+/* --- New Section Balloon (#new-section-balloon-1) --- */
+#new-section-balloon-1 {
+    /* Position relative to #new-section */
+    top: 20%; /* Position near the top (Reference point) */
+    left: 10%; /* Position towards the left (Reference point) */
+    /* Adjusted transform to move 75px down and 15px right */
+    transform: translate(calc(-50% + 15px), calc(-50% + 75px)) rotate(var(--current-rotation)) scale(var(--current-scale));
+    /* Specific size/rotation */
+    width: 225px; /* User specified size */
+    height: 225px; /* User specified size */
+    --initial-rotation: -8deg; /* Reversed angle */
+    z-index: 11; /* Ensure it's above section content */
+}
+/* --- End New Section Balloon --- */
+
+
+/* --- Balloon Popping Animations --- */
+
+/* General popping animation - applies to any balloon with .popping */
+.balloon.popping {
+    /* Use the specific balloon's transform for start/mid states */
+    /* The final state (scale 0) uses the general transform structure */
+    animation-name: popEffect; /* Default animation */
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+/* Specific animation assignment for #test-balloon when popping */
+#test-balloon.popping {
+    animation-name: popEffectTestBalloon; /* Override with specific animation */
+}
+
+/* Keyframes need to be generic or duplicated if transforms differ significantly */
+/* Let's try a generic approach using current variables */
+@keyframes popEffect {
+    0% {
+        /* Start state uses current transform */
+        transform: translate(var(--current-translate-x, -50%), var(--current-translate-y, -50%)) rotate(var(--current-rotation)) scale(var(--current-scale));
+        opacity: 1;
+    }
+    50% {
+        /* Mid state scales up */
+        transform: translate(var(--current-translate-x, -50%), var(--current-translate-y, -50%)) rotate(var(--current-rotation)) scale(calc(var(--current-scale) * 1.2));
+        opacity: 0.8;
+    }
+    100% {
+        /* End state scales down to 0 */
+        transform: translate(var(--current-translate-x, -50%), var(--current-translate-y, -50%)) rotate(var(--current-rotation)) scale(0);
+        opacity: 0;
+    }
+}
+/* Note: We might need JS to set --current-translate-x/y if the base transforms are too different */
+
+/* Keyframes specific to #test-balloon */
+@keyframes popEffectTestBalloon {
+    0% {
+        /* Start state uses current transform */
+        transform: translate(calc(-50% - 650px), -50%) rotate(var(--current-rotation)) scale(var(--current-scale));
+        opacity: 1;
+    }
+    50% {
+        /* Mid state scales up */
+        transform: translate(calc(-50% - 650px), -50%) rotate(var(--current-rotation)) scale(calc(var(--current-scale) * 1.2));
+        opacity: 0.8;
+    }
+    100% {
+        /* End state scales down to 0 */
+        transform: translate(calc(-50% - 650px), -50%) rotate(var(--current-rotation)) scale(0);
+        opacity: 0;
+    }
+}
+/* End Keyframes #test-balloon */
+
+/* Keyframes specific to #how-it-works-balloon-1 */
+@keyframes popEffectHowItWorksBalloon {
+    0% {
+        /* Start state uses current transform */
+        transform: translate(calc(-50% - 450px), calc(-50% - 250px)) rotate(var(--current-rotation)) scale(var(--current-scale));
+        opacity: 1;
+    }
+    50% {
+        /* Mid state scales up */
+        transform: translate(calc(-50% - 450px), calc(-50% - 250px)) rotate(var(--current-rotation)) scale(calc(var(--current-scale) * 1.2));
+        opacity: 0.8;
+    }
+    100% {
+        /* End state scales down to 0 */
+        transform: translate(calc(-50% - 450px), calc(-50% - 250px)) rotate(var(--current-rotation)) scale(0);
+        opacity: 0;
+    }
+}
+/* End Keyframes #how-it-works-balloon-1 */
+
+/* Keyframes specific to #how-it-works-balloon-2 */
+@keyframes popEffectHowItWorksBalloon2 {
+    0% {
+        /* Start state uses current transform */
+        transform: translate(calc(-50% + 450px), -50%) rotate(var(--current-rotation)) scale(var(--current-scale));
+        opacity: 1;
+    }
+    50% {
+        /* Mid state scales up */
+        transform: translate(calc(-50% + 450px), -50%) rotate(var(--current-rotation)) scale(calc(var(--current-scale) * 1.2));
+        opacity: 0.8;
+    }
+    100% {
+        /* End state scales down to 0 */
+        transform: translate(calc(-50% + 450px), -50%) rotate(var(--current-rotation)) scale(0);
+        opacity: 0;
+    }
+}
+/* End Keyframes #how-it-works-balloon-2 */
+
+/* Keyframes specific to #roadmap-balloon-1 */
+@keyframes popEffectRoadmapBalloon1 {
+    0% {
+        /* Start state uses current transform */
+        transform: translate(calc(-50% - 250px), calc(-50% - 50px)) rotate(var(--current-rotation)) scale(var(--current-scale));
+        opacity: 1;
+    }
+    50% {
+        /* Mid state scales up */
+        transform: translate(calc(-50% - 250px), calc(-50% - 50px)) rotate(var(--current-rotation)) scale(calc(var(--current-scale) * 1.2));
+        opacity: 0.8;
+    }
+    100% {
+        /* End state scales down to 0 */
+        transform: translate(calc(-50% - 250px), calc(-50% - 50px)) rotate(var(--current-rotation)) scale(0);
+        opacity: 0;
+    }
+}
+/* End Keyframes #roadmap-balloon-1 */
+
+/* Keyframes specific to #new-section-balloon-1 */
+@keyframes popEffectNewSectionBalloon1 {
+    0% {
+        /* Start state uses current transform */
+        transform: translate(calc(-50% + 15px), calc(-50% + 75px)) rotate(var(--current-rotation)) scale(var(--current-scale));
+        opacity: 1;
+    }
+    50% {
+        /* Mid state scales up */
+        transform: translate(calc(-50% + 15px), calc(-50% + 75px)) rotate(var(--current-rotation)) scale(calc(var(--current-scale) * 1.2));
+        opacity: 0.8;
+    }
+    100% {
+        /* End state scales down to 0 */
+        transform: translate(calc(-50% + 15px), calc(-50% + 75px)) rotate(var(--current-rotation)) scale(0);
+        opacity: 0;
+    }
+}
+/* End Keyframes #new-section-balloon-1 */
+
+/* --- End Balloon Popping Animations --- */
+
+
+/* --- Balloon Message Styles --- */
+
+/* General Balloon Message Styles */
+.balloon-message {
+    position: absolute; /* Position relative to the balloon's container */
+    /* Default positioning - will be overridden by specific IDs */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8) rotate(0deg); /* Default rotation 0 */
+    color: var(--color-text);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    z-index: 10000; /* Ensure message is above balloon */
+    pointer-events: none;
+}
+
+/* Specific message positioning for #test-balloon-message */
+#test-balloon-message { /* Belongs to #test-balloon */
+    top: 60%; /* Match balloon's top */
+    left: 50%; /* Match balloon's left */
+    /* Match balloon's transform structure and rotation */
+    transform: translate(calc(-50% - 650px), -50%) scale(0.8) rotate(-15deg);
+}
+
+/* Specific message positioning for #vision-balloon-1-message */
+#vision-balloon-1-message { /* Belongs to #vision-balloon-1 */
+    top: 15%; /* Match balloon's top */
+    left: 90%; /* Match balloon's left */
+    /* Match balloon's transform structure and rotation */
+    transform: translate(-50%, -50%) scale(0.8) rotate(10deg);
+}
+
+/* Specific message positioning for #hero-balloon-1-message */
+#hero-balloon-1-message { /* Belongs to #hero-balloon-1 */
+    top: 35%; /* Match adjusted balloon's top */
+    left: 80%; /* Match adjusted balloon's left */
+    /* Match balloon's transform structure and rotation */
+    transform: translate(-50%, -50%) scale(0.8) rotate(5deg); /* Use balloon's rotation */
+}
+
+/* Specific message positioning for #how-it-works-balloon-1-message */
+#how-it-works-balloon-1-message { /* Belongs to #how-it-works-balloon-1 */
+    top: 18%; /* Match balloon's top */
+    left: 50%; /* Match balloon's left reference */
+    /* Match balloon's transform structure and rotation */
+    transform: translate(calc(-50% - 450px), calc(-50% - 250px)) scale(0.8) rotate(-8deg); /* Use balloon's transform and rotation */
+}
+
+/* Specific message positioning for #how-it-works-balloon-2-message */
+#how-it-works-balloon-2-message { /* Belongs to #how-it-works-balloon-2 */
+    top: 92%; /* Match balloon's top */
+    left: 60%; /* Match balloon's left reference */
+    /* Match balloon's transform structure and rotation */
+    transform: translate(calc(-50% + 450px), -50%) scale(0.8) rotate(12deg); /* Use balloon's transform and rotation */
+}
+
+
+/* General rule for showing messages */
+.balloon-message.is-shown {
+    opacity: 1;
+    visibility: visible;
+    /* Scale changes, rotation matches the specific message's base rotation */
+    /* We need specific rules for the final transform */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+
+/* Specific shown state transform for #test-balloon-message */
+#test-balloon-message.is-shown {
+    transform: translate(calc(-50% - 650px), -50%) scale(1) rotate(-15deg);
+}
+
+/* Specific shown state transform for #vision-balloon-1-message */
+#vision-balloon-1-message.is-shown {
+    transform: translate(-50%, -50%) scale(1) rotate(10deg);
+}
+
+/* Specific shown state transform for #hero-balloon-1-message */
+#hero-balloon-1-message.is-shown {
+    transform: translate(-50%, -50%) scale(1) rotate(5deg); /* Use balloon's rotation */
+}
+
+/* Specific shown state transform for #how-it-works-balloon-1-message */
+#how-it-works-balloon-1-message.is-shown {
+    transform: translate(calc(-50% - 450px), calc(-50% - 250px)) scale(1) rotate(-8deg); /* Use balloon's transform and rotation */
+}
+
+/* Specific shown state transform for #how-it-works-balloon-2-message */
+#how-it-works-balloon-2-message.is-shown {
+    transform: translate(calc(-50% + 450px), -50%) scale(1) rotate(12deg); /* Use balloon's transform and rotation */
+}
+
+/* Specific message positioning for #roadmap-balloon-1-message */
+#roadmap-balloon-1-message { /* Belongs to #roadmap-balloon-1 */
+    top: 6%; /* Match balloon's top reference */
+    left: 5%; /* Match balloon's left reference */
+    /* Match balloon's adjusted transform structure and rotation */
+    transform: translate(calc(-50% - 250px), calc(-50% - 50px)) scale(0.8) rotate(-10deg); /* Use balloon's rotation */
+}
+
+/* Specific shown state transform for #roadmap-balloon-1-message */
+#roadmap-balloon-1-message.is-shown {
+    transform: translate(calc(-50% - 250px), calc(-50% - 50px)) scale(1) rotate(-10deg); /* Use balloon's rotation */
+}
+
+/* Specific message positioning for #new-section-balloon-1-message */
+#new-section-balloon-1-message { /* Belongs to #new-section-balloon-1 */
+    top: 20%; /* Match balloon's top reference */
+    left: 10%; /* Match balloon's left reference */
+    /* Match balloon's adjusted transform structure and rotation */
+    transform: translate(calc(-50% + 15px), calc(-50% + 75px)) scale(0.8) rotate(-8deg); /* Use balloon's rotation */
+}
+
+/* Specific shown state transform for #new-section-balloon-1-message */
+#new-section-balloon-1-message.is-shown {
+    transform: translate(calc(-50% + 15px), calc(-50% + 75px)) scale(1) rotate(-8deg); /* Use balloon's rotation */
+}
+
+/* --- End Balloon Message Styles --- */
+
+/* Container for fixed effects - REMOVED */
+/* #fixed-effects-container { ... } */
+
+/* click-heart is now fixed again */
+.click-heart {
+    position: fixed; /* Back to fixed positioning */
+    pointer-events: none; /* Ignore mouse events */
+    z-index: 10000; /* Ensure hearts are above other content */
+    opacity: 0.8; /* Initial opacity for the container */
+    /* Animation is now handled by JavaScript */
+    /* Remove background properties from the container */
+    /* transform: scale(1); /* Start at normal size (JS will handle animation) - REMOVED */
+}
